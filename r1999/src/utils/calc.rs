@@ -1,8 +1,8 @@
-use crate::utils::stats::Enemy;
-use crate::utils::stats::Chara;
-use crate::utils::stats::Attack;
+use crate::utils::storage::Enemy;
+use crate::utils::storage::Chara;
+use crate::utils::storage::Attack;
 
-pub fn damage(character: &Chara, enemy: &Enemy, attack: &Attack, multiplier: u32) -> u32 {
+pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) -> u32 {
     
     let base :u32 = 30;
     

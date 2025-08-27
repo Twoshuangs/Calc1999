@@ -1,2 +1,2 @@
 pub mod calc;
-pub mod stats;
+pub mod storage;

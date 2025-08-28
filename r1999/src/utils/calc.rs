@@ -1,8 +1,8 @@
-use crate::utils::storage::Enemy;
-use crate::utils::storage::Chara;
-use crate::utils::storage::Attack;
+use crate::Enemy;
+use crate::Chara;
+use crate::Attack;
 
-pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) -> u32 {
+pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) {
     
     let base :u32 = 30;
     
@@ -12,7 +12,7 @@ pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) -
     //lower limit of .3
     if dmgdealt <= 30 {dmgdealt = base;}
     
-    println!("damage bonus: {}",dmgdealt);
+    println!("\ndamage bonus: {}",dmgdealt-100);
 
     //might
     let mut might :u32 = 1;
@@ -23,7 +23,7 @@ pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) -
         might += character.ult;
     }
     
-    println!("might:{}", might);
+    println!("Incan/Ult might:{}", might);
 
     //att
     let def :u32;
@@ -33,7 +33,7 @@ pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) -
 
     println!("Attack: {}", att);
 
-    let mut damage = multiplier*att*dmgdealt*might/100/100;
+    let mut damage = multiplier*att*dmgdealt*might/100/100/100;
     
     //afflatus
     if attack.strong == true {damage = damage * 130 / 100;}
@@ -41,13 +41,11 @@ pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) -
     //crit
     let damagecrit :u32 = (character.critdmg - enemy.critdef) * damage/100;
     
-    //final dmg
-    
 
     println!("crit rate:{}%", character.critrate-enemy.critres);  
     println!("if crit: {}", damagecrit);
 
-    return damage;
+    println!("no crit: {}", damage);
     
 }
 

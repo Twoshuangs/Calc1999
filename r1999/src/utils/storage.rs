@@ -1,24 +1,30 @@
-pub struct Chara {
-    pub atk: u32,
-    pub critrate: u32,
-    pub critdmg: u32,
-    pub dmgbonus: u32,
-    pub incan: u32,
-    pub ult: u32,
-    pub penrate: u32,
-}
+pub fn serding(u32: i) -> Chara {
 
-pub struct Enemy {
-    pub rdef: u32,
-    pub mdef: u32,
-    pub critres: u32,
-    pub critdef: u32,
-    pub dmgred: u32,
-}
+    let melania = Chara{
+        atk: 1929,
+        critrate: 51,
+        critdmg: 185,
+        dmgbonus: 55,
+        incan: 0,
+        ult: 58,
+        penrate: 0,
+    };
+    let carbuncle = Enemy {
+        rdef: 765,
+        mdef: 637,
+        critres: 0,
+        critdef: 19,
+        dmgred: 15,
+    };
+    let kick = Attack {
+        incan: true, 
+        ult: false,
+        strong: false, 
+        mental: true, 
+    };
+    
 
-pub struct Attack {
-    pub incan: bool,
-    pub ult: bool,
-    pub strong: bool, 
-    pub mental: bool, 
+    
+        return melania;
+
 }

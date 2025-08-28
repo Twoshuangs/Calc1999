@@ -1,0 +1,5 @@
+[
+	{ "name": "melania", "atk": 1929, "critrate": 51,  "critdmg": 185, "dmgbonus": 35, "incan": 0, "ult": 58, "penrate": 0 },
+	
+	{ "name": "semmelweis", "atk": 0, "critrate":10, "critdmg": 200, "dmgbonus": 80, "incan": 10, "ult": 0, "penrate": 0 }
+]

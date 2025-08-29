@@ -15,7 +15,7 @@ pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) {
     println!("\ndamage bonus: {}",dmgdealt-100);
 
     //might
-    let mut might :u32 = 1;
+    let mut might :u32 = 100;
     if attack.incan == true {
         might += character.incan;
     }

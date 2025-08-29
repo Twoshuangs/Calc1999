@@ -1,6 +1,6 @@
 use std::fs;
 use std::io;
-mod utils;
+mod calc;
 
 //to-do: [y/n] input loop, overflow, calc numbers
 
@@ -69,7 +69,7 @@ fn main() {
     let chara_u: usize = chara as usize;
     let character = characters[chara_u].clone();
 
-    utils::calc::damage(character, carbuncle, atktype, multiplier);
+    calc::damage(character, carbuncle, atktype, multiplier);
 }
 
 fn atkconf () -> Attack {

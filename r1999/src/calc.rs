@@ -4,13 +4,11 @@ use crate::Attack;
 
 pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) {
     
-    let base :u32 = 30;
-    
     //dmgdealt
     let mut dmgdealt:u32;
     dmgdealt = 100+character.dmgbonus-enemy.dmgred;
     //lower limit of .3
-    if dmgdealt <= 30 {dmgdealt = base;}
+    if dmgdealt <= 30 {dmgdealt = 30;}
     
     println!("\ndamage bonus: {}",dmgdealt-100);
 
@@ -33,7 +31,7 @@ pub fn damage(character: Chara, enemy: Enemy, attack: Attack, multiplier: u32) {
 
     println!("Attack: {}", att);
 
-    let mut damage = multiplier*att*dmgdealt*might/100/100/100;
+    let mut damage = multiplier*att/100*dmgdealt/100*might/100;
     
     //afflatus
     if attack.strong == true {damage = damage * 130 / 100;}

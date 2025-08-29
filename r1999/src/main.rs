@@ -2,8 +2,6 @@ use std::fs;
 use std::io;
 mod calc;
 
-//to-do: [y/n] input loop, overflow, calc numbers
-
 #[derive(serde::Deserialize, Clone)]
 pub struct Chara {
     pub name: String,
@@ -51,7 +49,7 @@ fn main() {
     let characters = load_chara("char.json");
     let x: u32 = characters.len() as u32;
 
-    println!("Characters:");
+    println!("\nCharacters:");
     for (i, c) in characters.iter().enumerate() {
         println!("{} {}", i, c.name);
     }

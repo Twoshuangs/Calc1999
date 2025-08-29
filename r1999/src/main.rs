@@ -87,21 +87,25 @@ fn atkconf () -> Attack {
 
 fn get_input(prompt: &str) -> bool{
     println!("\n{}: [y/n]", prompt);
-    let mut input = String::new();
     let i; 
-    loop{ 
+    'check: loop{ 
+
+        let mut input = String::new();        
+        
         io::stdin()
             .read_line(&mut input)
             .expect("Failed to read input");
-        let x = input.trim();
+        let x = input.trim().to_string();
+
         if x == "y"{
             i = true;
-            break;
+            break 'check;
         } else if x == "n" {
             i = false;
-            break;
+            break 'check;
         } else {
-            println!("[y/n]");
+            println!("Please choose between [y/n]");
+            continue;
         }
     }
     return i;

@@ -69,7 +69,7 @@ fn main() {
     
     loop {
 
-        if chara <= x {
+        if chara < x {
             break;
         } else {
             println!("Invalid choice");

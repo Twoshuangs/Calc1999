@@ -1,6 +1,9 @@
 use std::fs;
+//use std::fs::OpenOptions;
 use std::io;
+use std::path::PathBuf;
 mod calc;
+extern crate dirs;
 
 #[derive(serde::Deserialize, Clone)]
 pub struct Chara {
@@ -29,7 +32,10 @@ pub struct Attack {
     pub mental: bool, 
 }
 
-fn load_chara(path: &str) -> Vec<Chara> {
+const DEFAULT_CHAR: &'static str = r#"[{ "name": "melania", "atk": 1929, "critrate": 51,  "critdmg": 185, "dmgbonus": 35, "incan": 0, "ult": 58, "penrate": 0 }, { "name": "semmelweis", "atk": 0, "critrate":10, "critdmg": 200, "dmgbonus": 80, "incan": 10, "ult": 0, "penrate": 0} ] "# ; 
+
+fn load_chara(path: PathBuf) -> Vec<Chara> {
+    println!("Loading characters...");
     let data = fs::read_to_string(path).expect("Unable to read file");
     serde_json::from_str::<Vec<Chara>>(&data).expect("JSON parsing failed")
 }
@@ -44,9 +50,15 @@ fn main() {
         dmgred: 15,
     };
 
+    check_config();
     let atktype = atkconf();
     let multiplier = get_u32("Multiplier");
-    let characters = load_chara("char.json");
+    
+    let mut conf_loc: PathBuf = dirs::config_dir().expect("Can't find config location");
+    conf_loc.push("calc1999");
+    conf_loc.push("char.json");
+    
+    let characters = load_chara(conf_loc);
     let x: u32 = characters.len() as u32;
 
     println!("\nCharacters:");
@@ -68,6 +80,33 @@ fn main() {
     let character = characters[chara_u].clone();
 
     calc::damage(character, carbuncle, atktype, multiplier);
+}
+
+fn check_config(){
+    let mut conf_loc: PathBuf = dirs::config_dir().expect("Can't find config location");
+    conf_loc.push("calc1999");
+    conf_loc.push("char.json");
+    match fs::exists(conf_loc) {
+        Ok(true) => println!("Character list found"),
+        Ok(false) => generate_config(),
+        Err(_) => println!("Can't check for exisiting character list"),
+    };
+    
+}
+
+fn generate_config(){
+    let mut conf_loc: PathBuf = dirs::config_dir().expect("Can't find config location");
+    conf_loc.push("calc1999");
+    println!("Generating default characters...");
+    match fs::create_dir(&conf_loc){
+        Ok(()) => println!("Directory created"),
+        Err(e) => println!("Failed to create directory: {:?}",e.kind()),
+    };
+    conf_loc.push("char.json");
+    match fs::write(conf_loc,DEFAULT_CHAR) {
+        Ok(()) => println!("Characters loaded"),
+        Err(_) => println!("Can't write file"),
+    };
 }
 
 fn atkconf () -> Attack {
